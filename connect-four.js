@@ -6,6 +6,10 @@ function updateUI(){
     if(game === undefined){
         document.getElementById('board-holder').classList.add('is-invisible')
     } else {
+        game.checkForATie();
+        game.checkForDiagonalWin();
+        game.checkForColumnWin()
+        game.checkForRowWin()
         document.getElementById('board-holder').classList.remove('is-invisible')
         document.getElementById('game-name').innerHTML = game.getName();
     }
@@ -21,6 +25,11 @@ function updateUI(){
         clickTargets.classList.remove("red");
     }
     for(let i = 0; i < 7; i++){
+        if(game.isColumnFull(i)){
+            document.getElementById(`column-${i}`).classList.add("full");
+        } else {
+            document.getElementById(`column-${i}`).classList.remove("full");
+        }
         for(let j = 0; j < 6; j++){
             let token = game.getTokenAt(j, i)
             let currentSquare = document.getElementById(`square-${5 - j}-${i}`);

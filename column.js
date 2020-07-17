@@ -11,4 +11,8 @@ export class Column{
     getTokenAt(index){
         return this.columnArray[index]
     }
+
+    isFull(){
+        return !this.columnArray.includes(null);
+    }
 };
