@@ -3,6 +3,8 @@ import { ColumnWinInspector } from './column-win-inspector.js'
 import { RowWinInspector } from './row-win-inspector.js';
 import { DiagonalWinInspector } from './diagonal-win-inspector.js';
 
+//import { GameJsonSerializer } from "./game-JSON-serializer.js";
+
 export class Game{
     constructor(player1, player2){
         this.player1 = player1
@@ -86,10 +88,11 @@ export class Game{
     }
 
     playInColumn(columnIndex){
-        this.columns[columnIndex].add(this.currentPlayer)
-        if(this.currentPlayer === 1) this.currentPlayer = 2;
-        else this.currentPlayer = 1;
-
+        if(!this.isColumnFull(columnIndex)){
+            this.columns[columnIndex].add(this.currentPlayer)
+            if(this.currentPlayer === 1) this.currentPlayer = 2;
+            else this.currentPlayer = 1;
+        }
     }
     getTokenAt(rowIndex, columnIndex){
         return this.columns[columnIndex].columnArray[rowIndex]
